@@ -4,4 +4,7 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.5.1"]
-                 [org.clojure/math.numeric-tower "0.0.2"]])
+                 [org.clojure/math.numeric-tower "0.0.2"]
+                 [criterium "0.4.1"]
+                 [org.clojure/math.combinatorics "0.0.4"]
+                 [org.clojure/core.logic "0.8.3"]])
