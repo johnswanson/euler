@@ -6,7 +6,7 @@
 
 (defn divisible? [n divisor] (= 0 (mod n divisor)))
 
-(defn factor [n]
+(defn prime-factor [n]
   {:post [(every? prime? %)]}
   (let [f1 (->> (range 2 (math/floor (min (inc (math/sqrt n))
                                           (inc (/ n 2)))))
@@ -14,8 +14,11 @@
              (first))
         f2 (if f1 (/ n f1))]
     (if f1
-      (concat (factor f1) (factor f2))
+      (concat (prime-factor f1) (prime-factor f2))
       [n])))
+
+(defn proper-divisors [n]
+  (filter (partial divisible? n) (range 1 (inc (math/round (/ n 2))))))
 
 (defn factors [n]
   (filter #(= 0 (mod n %)) (nnext (range (inc (math/round (/ n 2)))))))

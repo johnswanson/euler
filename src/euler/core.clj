@@ -19,12 +19,12 @@
 (defn problem-12 []
   (first (for [n (range 1 10000000)
                :let [t (reduce + (range (inc n)))
-                     factors (frequencies (utils/factor t))
+                     factors (frequencies (utils/prime-factor t))
                      exps (reduce * (map inc (vals factors)))]
                :when (< 500 exps)]
            {:n n
             :t t
-            :factors (utils/factor t)})))
+            :factors (utils/prime-factor t)})))
 
 (defn square [n] (math/expt n 2))
 
@@ -37,7 +37,7 @@
 
 (defn smallest-multiple [n]
   (->> (range 2 (inc n))
-    (map (comp frequencies utils/factor))
+    (map (comp frequencies utils/prime-factor))
     (reduce #(merge-with max %1 %2))
     (map (fn [[k v]] (math/expt k v)))
     (reduce *)))
