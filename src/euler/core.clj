@@ -57,6 +57,64 @@
        (map-indexed score)
        (reduce +)))))
 
+(defn leap-year? [y] (and (utils/divisible? y 4)
+                          (or (not (utils/divisible? y 100))
+                              (utils/divisible? y 400))))
+
+(defn days-in [m y]
+  (case m
+    0 31
+    1 (if (leap-year? y) 29 28)
+    2 31
+    3 30
+    4 31
+    5 30
+    6 31
+    7 31
+    8 30
+    9 31
+    10 30
+    11 31))
+
+(defn next-month [m y d]
+  (let [month (mod (inc m) 12)
+        year (if (= month 0) (inc y) y)
+        day (mod (+ d (days-in m y)) 7)]
+    {:month month
+     :year year
+     :day day}))
+
+(defn days
+  ([] (days {:month 0 :year 1900 :day 1}))
+  ([{:keys [month year day] :as m}]
+   (cons m (lazy-seq (days (next-month month year day))))))
+
+(defn problem-19
+  "You are given the following information, but you may prefer to do some
+  research for yourself.
+
+  1 Jan 1900 was a Monday.
+  Thirty days has September,
+  April, June and November.
+  All the rest have thirty-one,
+  Saving February alone,
+  Which has twenty-eight, rain or shine.
+  And on leap years, twenty-nine.
+  A leap year occurs on any year evenly divisible by 4, but not on a century
+  unless it is divisible by 400.
+  How many Sundays fell on the first of the month during the twentieth century
+  (1 Jan 1901 to 31 Dec 2000)?"
+  []
+  (letfn [(before-2001 [{year :year}] (< year 2001))
+          (before-1901 [{year :year}] (< year 1901))
+          (sunday? [{day :day}] (= day 0))]
+    (->> (days)
+      (drop-while before-1901)
+      (take-while before-2001)
+      (filter sunday?)
+      (count))))
+
+
 (defn problem-9 []
   (for [a (range 1 1000)
         b (range 1 1000)
