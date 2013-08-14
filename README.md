@@ -1,13 +1,11 @@
-# euler
+# Project Euler Solutions
 
-A Clojure library designed to ... well, that part is up to you.
+I'm playing around with Project Euler.
 
-## Usage
+Clojure almost makes it too easy!
 
-FIXME
-
-## License
-
-Copyright © 2013 FIXME
-
-Distributed under the Eclipse Public License, the same as Clojure.
+# Warning #
+**Don't look at this if you want to do the Project Euler problems
+yourself.** PE asks users not to post answers anywhere other than the PE site--
+I'm violating that because anyone who is interested in doing PE hopefully
+recognizes the mind-boggling lunacy/idiocy of "cheating" on these.
